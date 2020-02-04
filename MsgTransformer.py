@@ -6,4 +6,5 @@ consumer = KafkaConsumer(bootstrap_servers='kafka:9092')
 consumer.subscribe(['TopicIn'])
 
 for msg in consumer:
-    print(msg)
+    future = prod.send('TopicOut', msg.value)
+    future.get()
